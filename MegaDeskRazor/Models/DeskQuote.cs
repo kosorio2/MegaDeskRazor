@@ -48,6 +48,7 @@ namespace MegaDeskRazor.Models //This makes sure that the class is unique from t
         [Display(Name = "Quote Date")]
         public DateTime QuoteDate { get; set; }
 
+        [Display(Name = "Delivery")]
         public int DeliveryId { get; set; } //This is the key linking to the Delivery class 
 
         [Display(Name = "Quote Price")]
@@ -61,7 +62,9 @@ namespace MegaDeskRazor.Models //This makes sure that the class is unique from t
 
 
         // Methods
-        public decimal GetQuotePrice() //This is a method that accessed all the information above
+
+        // The context will now allow me to look up data
+        public decimal GetQuotePrice(MegaDeskRazor.Data.MegaDeskRazorContext context) //This is a method that accessed all the information above
         {
             //    getRushOrderprices();
 
@@ -85,6 +88,12 @@ namespace MegaDeskRazor.Models //This makes sure that the class is unique from t
 
             //Cost for the surface Materials 
             decimal surfaceMaterialPrice = 0.00M;
+
+            var surfaceMaterialPrices = context.DeskQtopMaterial
+                .Where(d => d.DesktopMaterialId == this.Desk.DesktopMaterialId).FirstOrDefault(); //This sets up the query
+
+
+            //surfaceMaterialPrice = surfaceMaterialPrices.Cost; - Not quite sure how to make this one work 
 
             //switch (this.Desk.SurfaceMaterial)
             //{
@@ -112,54 +121,23 @@ namespace MegaDeskRazor.Models //This makes sure that the class is unique from t
             //shipping cost using switch 
             decimal shippingPrice = 0.00M;
 
-            //    switch (this.DeliveryType)
-            //    {
-            //        case Delivery.Rush3Days:
-            //            if (surfaceArea < 1000)
-            //            {
-            //                shippingPrice = _rushOrderPrices[0, 0];
-            //            }
-            //            else if (surfaceArea <= 2000)
-            //            {
-            //                shippingPrice = _rushOrderPrices[0, 1];
-            //            }
-            //            else
-            //            {
-            //                shippingPrice = _rushOrderPrices[0, 2];
-            //            }
-            //            break;
+            var shippingPrices = context.Delivery
+                .Where(d => d.DeliveryId == this.DeliveryId).FirstOrDefault();
 
-            //        case Delivery.Rush5Days:
-            //            if (surfaceArea < 1000)
-            //            {
-            //                shippingPrice = _rushOrderPrices[1, 0];
-            //            }
-            //            else if (surfaceArea <2000)
-            //            {
-            //                shippingPrice = _rushOrderPrices[1, 1];
-            //            }
-            //            else
-            //            {
-            //                shippingPrice = _rushOrderPrices[1, 2];
-            //            }
-            //            break;
+            if (surfaceArea < 1000)
+            {
+                shippingPrice = shippingPrices.LessThan1000;
+            }
+            else if (surfaceArea <= 2000)
+            {
+                shippingPrice = shippingPrices.Between100And2000;
+            }
+            else
+            {
+                shippingPrice = shippingPrices.GreaterThan2000;
+            }
 
-            //        case Delivery.Rush7Days:
-            //            if (surfaceArea < 1000)
-            //            {
-            //                shippingPrice = _rushOrderPrices[2, 0];
-            //            }
-            //            else if (surfaceArea <= 2000)
-            //            {
-            //                shippingPrice = _rushOrderPrices[2, 1];
-            //            }
-            //            else
-            //            {
-            //                shippingPrice = _rushOrderPrices[2, 2];
-            //            }
-            //            break; 
 
-            //    }
 
             quotePrice = quotePrice + surfacePrice + drawerPrice + surfaceMaterialPrice + shippingPrice;
 

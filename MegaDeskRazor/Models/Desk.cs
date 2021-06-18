@@ -35,6 +35,7 @@ public class Desk
         [Display(Name = "Number of Drawers")]
         public  int NumberOfDrawers { get; set; }
 
+        [Display(Name = "Desktop Material")]
         public int DesktopMaterialId { get; set; } //This is replacing the enum, it is now a foreign key pointing to the DesktopMaterial class
 
         //navigation properties

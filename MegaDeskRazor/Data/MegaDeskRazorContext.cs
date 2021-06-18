@@ -16,11 +16,11 @@ namespace MegaDeskRazor.Data
 
         public DbSet<MegaDeskRazor.Models.DeskQuote> DeskQuote { get; set; }
 
-        public DbSet<MegaDeskRazor.Models.DeskQuote> Desk { get; set; }
+        public DbSet<MegaDeskRazor.Models.Desk> Desk { get; set; }
 
-        public DbSet<MegaDeskRazor.Models.DeskQuote> Delivery { get; set; }
+        public DbSet<MegaDeskRazor.Models.Delivery> Delivery { get; set; }
 
-        public DbSet<MegaDeskRazor.Models.DeskQuote> DeskQtopMaterial { get; set; }
+        public DbSet<MegaDeskRazor.Models.DesktopMaterial> DeskQtopMaterial { get; set; }
 
     }
 }
