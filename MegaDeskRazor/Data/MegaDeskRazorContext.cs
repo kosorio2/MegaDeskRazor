@@ -1,0 +1,26 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using MegaDeskRazor.Models;
+
+namespace MegaDeskRazor.Data
+{
+    public class MegaDeskRazorContext : DbContext
+    {
+        public MegaDeskRazorContext (DbContextOptions<MegaDeskRazorContext> options)
+            : base(options)
+        {
+        }
+
+        public DbSet<MegaDeskRazor.Models.DeskQuote> DeskQuote { get; set; }
+
+        public DbSet<MegaDeskRazor.Models.DeskQuote> Desk { get; set; }
+
+        public DbSet<MegaDeskRazor.Models.DeskQuote> Delivery { get; set; }
+
+        public DbSet<MegaDeskRazor.Models.DeskQuote> DeskQtopMaterial { get; set; }
+
+    }
+}

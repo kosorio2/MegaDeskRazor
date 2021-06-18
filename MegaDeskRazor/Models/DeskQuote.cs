@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MegaDeskRazor //This makes sure that the class is unique from the others 
+namespace MegaDeskRazor.Models //This makes sure that the class is unique from the others 
 {
     //public enum Delivery
     //{
@@ -41,21 +42,25 @@ namespace MegaDeskRazor //This makes sure that the class is unique from the othe
         public int DeskQuoteId { get; set; } //This gives the primary key for the Desk Quote
         public int DeskId { get; set; } //This is a foreign key pointing to the desk class 
 
+        [Display(Name = "Customer Name")] 
         public string CustomerName { get; set; }
 
-
+        [Display(Name = "Quote Date")]
         public DateTime QuoteDate { get; set; }
 
         public int DeliveryId { get; set; } //This is the key linking to the Delivery class 
 
-
+        [Display(Name = "Quote Price")]
         public decimal QuotePrice { get; set; }
 
         // navigation properties - they help navigate to another entity
         public Desk Desk { get; set; }
 
+        [Display(Name = "Delivery Type")]
         public Delivery DeliveryType { get; set; }
 
+
+        // Methods
         public decimal GetQuotePrice() //This is a method that accessed all the information above
         {
             //    getRushOrderprices();
