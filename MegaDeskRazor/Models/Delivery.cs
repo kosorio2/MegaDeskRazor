@@ -12,6 +12,8 @@ namespace MegaDeskRazor.Models
         public int DeliveryId { get; set; }
 
         [Display(Name = "Delivery Type")]
+        [RegularExpression(@"^[ A-Za-z0-9_@./#&+-]*$")]
+        [Required]
         public string DeliveryType { get; set; }
 
         public decimal LessThan1000 { get; set; }

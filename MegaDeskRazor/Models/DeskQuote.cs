@@ -89,7 +89,7 @@ namespace MegaDeskRazor.Models //This makes sure that the class is unique from t
             //Cost for the surface Materials 
             decimal surfaceMaterialPrice = 0.00M;
 
-            var surfaceMaterialPrices = context.DeskQtopMaterial
+            var surfaceMaterialPrices = context.DesktopMaterial
                 .Where(d => d.DesktopMaterialId == this.Desk.DesktopMaterialId).FirstOrDefault(); //This sets up the query
 
 

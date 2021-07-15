@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "{searchString?}"
 @model MegaDeskRazor.Pages.DeskQuotes.IndexModel
 
 @{
@@ -10,6 +10,12 @@
 <p>
     <a asp-page="Create">Create New</a>
 </p>
+<form>
+    <p>
+        Title: <input type="text" asp-for="SearchString" />
+        <input type="submit" value="Filter" />
+    </p>
+</form>
 <table class="table">
     <thead>
         <tr>
@@ -23,7 +29,7 @@
                 @Html.DisplayNameFor(model => model.DeskQuote[0].QuotePrice)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DeskQuote[0].Desk)
+                @Html.DisplayNameFor(model => model.DeskQuote[0].Desk.SurfaceMaterial.DesktopMaterialName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.DeskQuote[0].DeliveryType)
@@ -32,29 +38,30 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.DeskQuote) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.CustomerName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.QuoteDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.QuotePrice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Desk.DeskId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DeliveryType.DeliveryId)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.DeskQuoteId">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.DeskQuoteId">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.DeskQuoteId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.DeskQuote)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustomerName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.QuoteDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.QuotePrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Desk.SurfaceMaterial.DesktopMaterialName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DeliveryType.DeliveryType)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.DeskQuoteId" class="index-btn btn btn-primary">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.DeskQuoteId" class="index-btn btn btn-primary">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.DeskQuoteId" class="index-btn btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

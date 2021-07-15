@@ -28,18 +28,23 @@ public class Desk
 
         //Properties
         public int DeskId { get; set; } //This is a primary key 
+
+        [Range(MIN_WIDTH, MAX_WIDTH), Required]
         public decimal Width { get; set; }
 
+        [Range(MIN_DEPTH, MAX_DEPTH), Required]
         public decimal Depth { get; set; }
 
+        [Range(MIN_DESK_DRAWERS, MAX_DESK_DRAWERS), Required]
         [Display(Name = "Number of Drawers")]
         public  int NumberOfDrawers { get; set; }
 
+        [Required]
         [Display(Name = "Desktop Material")]
         public int DesktopMaterialId { get; set; } //This is replacing the enum, it is now a foreign key pointing to the DesktopMaterial class
 
         //navigation properties
-        [Display(Name = "Desktop Material")] // This is the name that the users will see 
+        // This is the name that the users will see 
         public DesktopMaterial SurfaceMaterial { get; set; } //This is in the Desktop Material class 
     }
 }

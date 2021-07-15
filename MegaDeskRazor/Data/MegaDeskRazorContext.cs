@@ -20,7 +20,7 @@ namespace MegaDeskRazor.Data
 
         public DbSet<MegaDeskRazor.Models.Delivery> Delivery { get; set; }
 
-        public DbSet<MegaDeskRazor.Models.DesktopMaterial> DeskQtopMaterial { get; set; }
+        public DbSet<MegaDeskRazor.Models.DesktopMaterial> DesktopMaterial { get; set; }
 
     }
 }
